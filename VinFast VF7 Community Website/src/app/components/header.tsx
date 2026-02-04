@@ -1,6 +1,13 @@
 import { Link, useLocation } from 'react-router';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Facebook } from 'lucide-react';
 import { useState } from 'react';
+
+const ZaloIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 500 500" fill="currentColor" className={className}>
+    <path d="M428.14 71.86C380.6 24.32 317.41 0 250 0 112 0 0 112 0 250c0 67.41 24.32 130.61 71.86 178.14C119.39 475.68 182.59 500 250 500c67.41 0 130.61-24.32 178.14-71.86C475.68 380.61 500 317.41 500 250c0-67.41-24.32-130.6-71.86-178.14zm-143.25 358.8H184.2c-5.8 0-10.5-4.7-10.5-10.5V368c0-5.8 4.7-10.5 10.5-10.5h16.2c3.5 0 6.6-2 8.1-5.2l20.4-44.2h-63.5l-6.4 14.8c-2.3 5.3-7.5 8.7-13.3 8.7h-18.4c-9.6 0-16.3-9.1-13.3-17.9l46.4-135.4c1.8-5.3 6.9-8.9 12.5-8.9h23.1c5.9 0 11.2 3.9 12.8 9.6l43.2 153.3c2.6 9.2-4.4 18.5-13.9 18.2l-53.1.1zm154.2 0h-57.8c-5.8 0-10.5-4.7-10.5-10.5v-10.8c0-5.8 4.7-10.5 10.5-10.5h33.8v-28.7H384c-5.8 0-10.5-4.7-10.5-10.5v-11.3c0-5.8 4.7-10.5 10.5-10.5h31.8v-27.4h-33.8c-5.8 0-10.5-4.7-10.5-10.5v-11.3c0-5.8 4.7-10.5 10.5-10.5h57.8c5.8 0 10.5 4.7 10.5 10.5v132.8c-0.1 5.7-4.8 10.4-10.6 10.4z" />
+    <path d="M228.6 308.1h30c5.8 0 10.5-4.7 10.5-10.5v-132.8c0-5.8-4.7-10.5-10.5-10.5h-30c-5.8 0-10.5 4.7-10.5 10.5v132.8c0 5.8 4.7 10.5 10.5 10.5zm-59.3-75.1l7.8-19.1h25.8l7.8 19.1h-41.4z" />
+  </svg>
+);
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -64,15 +71,25 @@ export function Header() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Social Icons */}
+          <div className="hidden md:flex items-center gap-4">
             <a
-              href="#"
+              href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white rounded-full hover:shadow-lg transition-all inline-block"
+              className="text-[#2D3436] hover:text-[#1877F2] transition-colors"
+              title="Facebook"
             >
-              Tham gia
+              <Facebook size={24} />
+            </a>
+            <a
+              href="https://zalo.me"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#2D3436] hover:text-[#0068FF] transition-colors"
+              title="Zalo"
+            >
+              <ZaloIcon className="w-6 h-6" />
             </a>
           </div>
 
@@ -101,14 +118,28 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white rounded-full hover:shadow-lg transition-all inline-block text-center"
-            >
-              Tham gia
-            </a>
+
+            {/* Mobile Social Icons */}
+            <div className="flex items-center justify-center gap-6 py-4 border-t border-gray-100 mt-2">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[#2D3436] hover:text-[#1877F2]"
+              >
+                <Facebook size={24} />
+                <span className="font-medium">Facebook</span>
+              </a>
+              <a
+                href="https://zalo.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[#2D3436] hover:text-[#0068FF]"
+              >
+                <ZaloIcon className="w-6 h-6" />
+                <span className="font-medium">Zalo</span>
+              </a>
+            </div>
           </div>
         )}
       </nav>
