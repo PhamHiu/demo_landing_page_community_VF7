@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
-import { Search, Zap, Wrench, Coffee, Phone, Navigation, Star, X, MapPin, Plus, User, CheckCircle, Image as ImageIcon, ThumbsUp, RotateCcw, BedDouble, Utensils, HelpCircle, ChevronDown, MoreHorizontal } from 'lucide-react';
+import { Search, Zap, Wrench, Coffee, Phone, Navigation, Star, X, MapPin, Plus, User, CheckCircle, Image as ImageIcon, ThumbsUp, RotateCcw, BedDouble, Utensils, HelpCircle, ChevronDown, MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import { Location } from '../types';
 import { chargingStations } from '../data/stations';
@@ -310,14 +310,16 @@ export function MapPage() {
             <h2 className="text-2xl font-bold text-[#2D3436]">
               {selectedLocation ? 'Chi tiết địa điểm' : 'Bản đồ dịch vụ'}
             </h2>
-            {selectedLocation && (
-              <button
-                onClick={() => setSelectedLocation(null)}
-                className="text-sm text-blue-600 hover:underline"
-              >
-                Quay lại
-              </button>
-            )}
+            <div className="flex items-center gap-2">
+              {selectedLocation && (
+                <button
+                  onClick={() => setSelectedLocation(null)}
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Quay lại
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -549,6 +551,20 @@ export function MapPage() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Sidebar Toggle Handle */}
+      <div
+        className={`absolute top-1/2 -translate-y-1/2 z-[1050] transition-all duration-300 ${showSidebar ? 'left-[100%] md:left-[400px]' : 'left-0'
+          }`}
+      >
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="bg-white border text-gray-400 hover:text-[#1A73E8] border-gray-200 border-l-0 shadow-md rounded-r-xl h-12 w-6 flex items-center justify-center cursor-pointer transition-colors"
+          title={showSidebar ? "Thu gọn sidebar" : "Mở sidebar"}
+        >
+          {showSidebar ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+        </button>
       </div>
 
       {/* Map */}

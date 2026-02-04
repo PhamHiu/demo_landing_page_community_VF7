@@ -1,19 +1,20 @@
-import { BrowserRouter } from 'react-router';
+import { useLocation } from 'react-router';
 import { Header } from '@/app/components/header';
 import { Footer } from '@/app/components/footer';
 import { AnimatedRoutes } from '@/app/components/animated-routes';
 
 function App() {
+  const location = useLocation();
+  const isMapPage = location.pathname === '/map';
+
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col overflow-x-hidden">
-        <Header />
-        <main className="flex-1 flex flex-col relative w-full">
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
+      <Header />
+      <main className="flex-1 flex flex-col relative w-full">
+        <AnimatedRoutes />
+      </main>
+      {!isMapPage && <Footer />}
+    </div>
   );
 }
 
