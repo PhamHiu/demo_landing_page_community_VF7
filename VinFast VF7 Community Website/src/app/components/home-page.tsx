@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { Battery, Users, Bot, Map, ChevronRight, Zap, Wrench, Coffee } from 'lucide-react';
+import { Battery, Users, Bot, Map, ChevronRight, ChevronLeft, Zap, Wrench, Coffee } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 import { CommunityBenefitsSection } from '@/app/components/community-benefits-section';
@@ -7,11 +7,37 @@ import { AchievementsTestimonialsSection } from '@/app/components/achievements-t
 import { FoundingMembersSection } from '@/app/components/founding-members-section';
 import { ThankYouLetter } from '@/app/components/thank-you-letter';
 import { FadeIn } from '@/app/components/ui/fade-in';
+import { ChatbotCar } from './chatbot-car';
 
 export function HomePage() {
   const navigate = useNavigate();
   const [showLetter, setShowLetter] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Hero Carousel Slides
+  const heroSlides = [
+    {
+      image: '/vinfast-vf-7-gray.jpg',
+      alt: 'VF7 Grey Sport'
+    },
+    {
+      image: '/club-vf7.jpg',
+      alt: 'VF7 Showroom'
+    },
+    {
+      image: '/cong-dong-vf-7.jpg',
+      alt: 'VF7 Community'
+    },
+  ];
+
+  // Auto-slide effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [heroSlides.length]);
 
   // Parallax Effect
   useEffect(() => {
@@ -19,8 +45,6 @@ export function HomePage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-
 
   const benefits = [
     {
@@ -45,178 +69,215 @@ export function HomePage() {
     },
   ];
 
-  const highlights = [
+  // Events data matching the reference design
+  const events = [
     {
       id: 1,
-      title: 'Hành trình xuyên Việt cùng VF7',
-      tag: 'Kinh nghiệm',
-      image: 'https://images.unsplash.com/photo-1727802329382-b9f080571270?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWV0bmFtJTIwcm9hZCUyMHRyYXZlbHxlbnwxfHx8fDE3Njk4NzczMTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      title: 'Offline Cafe Cuối Tuần',
+      date: '15 Thg 02',
+      location: 'Highland Coffee, Hồ Gươm',
+      attendees: 45,
+      image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&auto=format&fit=crop',
     },
     {
       id: 2,
-      title: 'Tips sạc nhanh tiết kiệm',
-      tag: 'Hướng dẫn',
-      image: 'https://images.unsplash.com/photo-1761320142429-0672277fc080?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpYyUyMGNhciUyMG1vZGVybiUyMGJsdWV8ZW58MXx8fHwxNzY5ODc3MzE1fDA&ixlib=rb-4.1.0&q=80&w=1080',
+      title: 'Hướng Dẫn Update Phần Mềm',
+      date: '22 Thg 02',
+      location: 'Online - Zoom Meeting',
+      attendees: 120,
+      image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=600&auto=format&fit=crop',
     },
     {
       id: 3,
-      title: 'Offline meet-up Hà Nội',
-      tag: 'Sự kiện',
-      image: 'https://images.unsplash.com/photo-1762158008280-3dcb1d1cbd99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwbWVldGluZyUyMGNvbW11bml0eXxlbnwxfHx8fDE3Njk4NzczMTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      title: 'Road Trip Sapa',
+      date: '01 Thg 03',
+      location: 'Khởi hành từ Hà Nội',
+      attendees: 28,
+      image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop',
+    },
+    {
+      id: 4,
+      title: 'Workshop Bảo Dưỡng Xe',
+      date: '08 Thg 03',
+      location: 'VinFast Showroom, Cầu Giấy',
+      attendees: 35,
+      image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&auto=format&fit=crop',
     },
   ];
+
 
   const partners = [
     'VinFast', 'EVN', 'Petrolimex', 'VinMart', 'GreenFeed', 'ABC Charging'
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#0f172a]">
-        {/* Background Image with Overlay */}
-        <div
-          className="absolute inset-0"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/60 to-[#0f172a]/90 z-[1]" />
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
-            alt="Futuristic Technology"
-            className="w-full h-full object-cover opacity-50"
-          />
-        </div>
-
-        {/* Liquid Blobs Background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full max-h-[600px] z-[2] pointer-events-none opacity-60">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30" />
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-cyan-500 rounded-full mix-blend-screen filter blur-3xl opacity-30" />
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30" />
-        </div>
-
-        {/* Glass Card Content */}
-        <div className="relative z-10 px-4 w-full max-w-5xl mx-auto">
-          <div className="backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] rounded-[2.5rem] pt-8 px-8 pb-12 md:pt-16 md:px-16 md:pb-24 text-center transform transition-all duration-700 animate-breathe">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-cyan-200 to-purple-200 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] pb-2 leading-tight">
-              Cộng đồng VinFast VF7
-            </h1>
-            <p className="text-lg md:text-2xl mb-10 text-blue-100/90 font-light tracking-wide max-w-3xl mx-auto leading-relaxed">
-              Kết nối hành trình xanh – Lan tỏa giá trị bền vững
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button
-                onClick={() => navigate('/community')}
-                className="px-10 py-4 bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white rounded-full font-bold text-lg hover:shadow-[0_0_20px_rgba(0,210,211,0.5)] transition-all transform hover:scale-105 active:scale-95"
-              >
-                Tham gia ngay
-              </button>
-              <button
-                onClick={() => navigate('/map')}
-                className="px-10 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-full font-bold text-lg hover:bg-white/20 hover:border-white/50 transition-all transform hover:scale-105 active:scale-95"
-              >
-                Khám phá bản đồ
-              </button>
-            </div>
-
-            {/* Why this community link */}
-            <div className="mt-12">
-              <button
-                onClick={() => setShowLetter(true)}
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-blue-200/30 bg-white/5 backdrop-blur-sm text-blue-100 transition-all duration-300 hover:bg-white/10 hover:border-blue-400 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] text-sm font-medium tracking-wider uppercase"
-              >
-                <span>Hành trình khởi nguồn🌱</span>
-                <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
-              </button>
-            </div>
+    <div className="min-h-screen bg-[#0F0F0F]">
+      {/* Hero Section with Image Carousel */}
+      <section className="relative h-screen overflow-hidden bg-[#0F0F0F] pt-24 md:pt-32">
+        {/* Carousel Background Images */}
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+          >
+            <ImageWithFallback
+              src={slide.image}
+              alt={slide.alt}
+              className="w-full h-full object-cover"
+            />
           </div>
+        ))}
+
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/70 via-[#0F0F0F]/50 to-[#0F0F0F] z-[1]" />
+
+        {/* Metallic Gold Corner Accents */}
+        <div className="absolute top-0 left-0 w-32 h-32 border-t-4 border-l-4 border-[#D4AF37] z-[2] opacity-60" />
+        <div className="absolute top-0 right-0 w-32 h-32 border-t-4 border-r-4 border-[#D4AF37] z-[2] opacity-60" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 border-b-4 border-l-4 border-[#D4AF37] z-[2] opacity-60" />
+        <div className="absolute bottom-0 right-0 w-32 h-32 border-b-4 border-r-4 border-[#D4AF37] z-[2] opacity-60" />
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-[#1A1A1A]/80 border border-[#D4AF37]/50 text-white hover:bg-[#D4AF37]/20 hover:border-[#D4AF37] transition-all hover:scale-110"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-[#1A1A1A]/80 border border-[#D4AF37]/50 text-white hover:bg-[#D4AF37]/20 hover:border-[#D4AF37] transition-all hover:scale-110"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+
+        {/* Dots Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`transition-all duration-300 ${index === currentSlide
+                ? 'w-8 h-3 bg-[#D61C2B] rounded-full shadow-[0_0_15px_rgba(214,28,43,0.6)]'
+                : 'w-3 h-3 bg-white/40 rounded-full hover:bg-white/70'
+                }`}
+            />
+          ))}
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 px-4 w-full max-w-5xl mx-auto">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] leading-tight uppercase text-center">
+            Cộng đồng <span className="text-[#D61C2B]">VinFast VF7</span>
+          </h1>
+          <p className="text-lg md:text-2xl mb-12 text-[#E0E0E0] font-light tracking-wide max-w-3xl mx-auto leading-relaxed text-center drop-shadow-md">
+            Kết nối hành trình xanh – Lan tỏa giá trị bền vững
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+            {/* Primary CTA - Deep Red with Glow */}
+            <button
+              onClick={() => navigate('/community')}
+              className="px-10 py-4 bg-gradient-to-r from-[#8B0000] to-[#D61C2B] text-white font-bold text-lg shadow-[0_0_30px_rgba(139,0,0,0.5)] hover:shadow-[0_0_50px_rgba(214,28,43,0.7)] transition-all transform hover:scale-105 active:scale-95 uppercase tracking-wider"
+              style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
+            >
+              Tham gia ngay
+            </button>
+            {/* Secondary CTA - Metallic Border */}
+            <button
+              onClick={() => navigate('/map')}
+              className="px-10 py-4 bg-transparent border-2 border-[#C0C0C0]/60 text-white font-bold text-lg hover:bg-[#C0C0C0]/10 hover:border-[#D4AF37] transition-all transform hover:scale-105 active:scale-95 uppercase tracking-wider backdrop-blur-sm"
+              style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
+            >
+              Khám phá bản đồ
+            </button>
+          </div>
+        </div>
+
+        {/* Journey Button - Gold */}
+        <div className="mt-12 flex justify-center relative z-20">
+          <button
+            onClick={() => setShowLetter(true)}
+            className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-[#D4AF37] bg-gradient-to-r from-[#D4AF37]/20 to-[#FFD700]/10 text-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37]/30 hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] font-semibold tracking-wider uppercase"
+            style={{ clipPath: 'polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)' }}
+          >
+            <span>🌱 Hành trình khởi nguồn</span>
+            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </section>
 
       <ThankYouLetter isOpen={showLetter} onClose={() => setShowLetter(false)} />
 
-      {/* User Benefits - Slide Left */}
-      {/* <section className="py-20 px-4 bg-white overflow-hidden">
-        <FadeIn direction="left" duration={1500} className="w-full">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <FadeIn key={index} delay={index * 300 + 750} duration={1200}>
-                  <div
-                    className="group p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-2 border border-gray-100 h-full"
-                  >
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#1A73E8] to-[#00D2D3] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                      <benefit.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-[#2D3436]">{benefit.title}</h3>
-                    <p className="text-gray-600">{benefit.description}</p>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
-      </section> */}
-
-      {/* Community Benefits Section - Slide Right */}
+      {/* Community Benefits Section */}
       <FadeIn direction="right" duration={1500} className="w-full">
         <CommunityBenefitsSection />
       </FadeIn>
 
-      {/* Counter Stats - Slide Left */}
-
-
-      {/* Achievements & Testimonials Section - Slide Right */}
+      {/* Achievements & Testimonials Section */}
       <FadeIn direction="right" duration={1500} className="w-full">
         <AchievementsTestimonialsSection />
       </FadeIn>
 
-      {/* Map Preview - Internal Layout (Already Animated) */}
-      <section className="py-20 px-4 bg-[#F5F6FA] overflow-hidden">
+      {/* Map Preview - Dark Mode with Cyan Glow */}
+      <section className="py-20 px-4 bg-[#0F0F0F] overflow-hidden">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <FadeIn direction="left" duration={2250} className="h-full flex flex-col justify-center">
               <div>
-                <h2 className="text-4xl font-bold mb-6 text-[#2D3436]">
+                <h2 className="text-4xl font-bold mb-6 text-white">
                   Bản đồ dịch vụ toàn diện
                 </h2>
-                <p className="text-lg text-gray-600 mb-8">
+                <p className="text-lg text-[#A3A3A3] mb-8">
                   Tìm kiếm trạm sạc, gara bảo dưỡng, và điểm hẹn cộng đồng gần bạn nhất.
                   Cập nhật liên tục với thông tin chi tiết và đánh giá từ người dùng thực tế.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
-                    <Zap className="w-6 h-6 text-[#2ECC71]" />
-                    <span className="text-gray-700">450+ trạm sạc khắp Việt Nam</span>
+                    <div className="w-10 h-10 rounded-lg bg-[#00F0FF]/20 flex items-center justify-center">
+                      <Zap className="w-5 h-5 text-[#00F0FF]" />
+                    </div>
+                    <span className="text-[#E0E0E0]">450+ trạm sạc khắp Việt Nam</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Wrench className="w-6 h-6 text-[#1A73E8]" />
-                    <span className="text-gray-700">200+ gara ủy quyền</span>
+                    <div className="w-10 h-10 rounded-lg bg-[#D61C2B]/20 flex items-center justify-center">
+                      <Wrench className="w-5 h-5 text-[#D61C2B]" />
+                    </div>
+                    <span className="text-[#E0E0E0]">200+ gara ủy quyền</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Coffee className="w-6 h-6 text-[#00D2D3]" />
-                    <span className="text-gray-700">150+ điểm hẹn cộng đồng</span>
+                    <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/20 flex items-center justify-center">
+                      <Coffee className="w-5 h-5 text-[#D4AF37]" />
+                    </div>
+                    <span className="text-[#E0E0E0]">150+ điểm hẹn cộng đồng</span>
                   </div>
                 </div>
+                {/* Cyan Ghost Button */}
                 <button
                   onClick={() => navigate('/map')}
-                  className="px-8 py-4 bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white rounded-full font-semibold hover:shadow-xl transition-all inline-flex items-center space-x-2"
+                  className="px-8 py-4 bg-transparent border-2 border-[#00F0FF] text-[#00F0FF] rounded-full font-semibold hover:bg-[#00F0FF]/10 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all inline-flex items-center space-x-2"
                 >
-                  <span>Xem bản đồ đầy đủ</span>
+                  <span>Tìm trạm sạc</span>
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
             </FadeIn>
             <FadeIn direction="right" delay={300} duration={2250}>
               <div className="relative">
-                <div className="aspect-square bg-gray-300 rounded-3xl overflow-hidden shadow-2xl hover:scale-105 transition-transform cursor-pointer" onClick={() => navigate('/map')}>
+                {/* Cyan Glow Border Container */}
+                <div className="aspect-square bg-[#1C1C1C] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,240,255,0.15)] border border-[#00F0FF]/30 hover:shadow-[0_0_60px_rgba(0,240,255,0.25)] hover:scale-105 transition-all cursor-pointer" onClick={() => navigate('/map')}>
                   <ImageWithFallback
                     src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800"
                     alt="Map preview"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover opacity-60"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A73E8]/80 to-transparent flex items-end justify-center p-8">
-                    <span className="text-white font-semibold text-lg">Nhấn để khám phá →</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent flex items-end justify-center p-8">
+                    <span className="text-[#00F0FF] font-semibold text-lg flex items-center gap-2">
+                      <div className="w-3 h-3 bg-[#00F0FF] rounded-full animate-pulse shadow-[0_0_10px_rgba(0,240,255,0.8)]" />
+                      Nhấn để khám phá
+                    </span>
                   </div>
                 </div>
               </div>
@@ -225,77 +286,184 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Highlights - Slide Right */}
-      <section className="py-20 px-4 bg-white overflow-hidden">
-        <FadeIn direction="right" duration={1500} className="w-full">
-          <div className="container mx-auto max-w-6xl">
-            <h2 className="text-4xl font-bold mb-12 text-center text-[#2D3436]">Những tin tức và sự kiện được cập nhật liên tục </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {highlights.map((item, index) => (
+      {/* SỰ KIỆN & TIN TỨC - Metallic Design */}
+      <section className="py-24 px-4 bg-[#0F0F0F] overflow-hidden relative">
+        {/* Background Elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#1A1A1A] to-transparent opacity-30" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#D61C2B] rounded-full mix-blend-screen filter blur-[150px] opacity-10" />
+
+        <FadeIn direction="up" duration={1500} className="w-full">
+          <div className="container mx-auto max-w-7xl relative z-10">
+            {/* Section Header */}
+            <div className="flex items-center justify-between mb-16">
+              <div className="relative">
+                <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider mb-2">
+                  <span className="text-gradient-silver">SỰ KIỆN</span>
+                  <span className="text-[#D61C2B] mx-3">&</span>
+                  <span className="text-gradient-gold">TIN TỨC</span>
+                </h2>
+                <div className="h-1 w-24 bg-gradient-to-r from-[#D61C2B] to-transparent rounded-full" />
+              </div>
+
+              <button
+                className="hidden md:flex items-center gap-2 text-[#A3A3A3] hover:text-[#D4AF37] transition-colors group uppercase text-sm font-bold tracking-widest"
+                onClick={() => navigate('/news')}
+              >
+                <span>Xem tất cả</span>
+                <div className="w-8 h-[1px] bg-[#333] group-hover:bg-[#D4AF37] transition-colors relative">
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-current rotate-45" />
+                </div>
+              </button>
+            </div>
+
+            {/* Events Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {events.map((event) => (
                 <div
-                  key={item.id}
-                  className={`group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all cursor-pointer ${index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''
-                    }`}
+                  key={event.id}
+                  className="group relative h-full transition-all duration-500 hover:-translate-y-2 preserve-3d perspective-1000"
+                  style={{ filter: 'drop-shadow(0 0 0 rgba(0,0,0,0))' }}
                 >
-                  <ImageWithFallback
-                    src={item.image}
-                    alt={item.title}
-                    className={`w-full object-cover ${index === 0 ? 'h-[500px]' : 'h-64'}`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 group-hover:from-black/90 transition-all">
-                    <span className="inline-block px-3 py-1 bg-[#1A73E8] text-white text-sm rounded-full mb-3 w-fit">
-                      {item.tag}
-                    </span>
-                    <h3 className="text-white text-2xl font-bold">{item.title}</h3>
+                  {/* Metallic Border Gradient (Now Relative) */}
+                  <div className="relative h-full bg-gradient-to-br from-[#444] via-[#222] to-[#444] p-[1px]"
+                    style={{ clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)' }}>
+
+                    {/* Interior Card Content */}
+                    <div className="h-full w-full bg-[#151515] hover:bg-[#1A1A1A] transition-colors relative overflow-hidden"
+                      style={{ clipPath: 'polygon(19px 0, 100% 0, 100% calc(100% - 19px), calc(100% - 19px) 100%, 0 100%, 0 19px)' }}>
+
+                      {/* Image Area */}
+                      <div className="relative h-48 overflow-hidden group-hover:shadow-glow-red transition-shadow duration-500">
+                        <ImageWithFallback
+                          src={event.image}
+                          alt={event.title}
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                        />
+                        {/* Overlay Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#151515] to-transparent opacity-80" />
+
+                        {/* Date Badge */}
+                        <div className="absolute top-0 right-0 p-4">
+                          <div className="bg-[#1A1A1A]/90 backdrop-blur border border-[#D61C2B]/30 p-2 text-center min-w-[60px]" style={{ clipPath: 'polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px)' }}>
+                            <span className="block text-[#D61C2B] font-bold text-lg leading-none">{event.date.split(' ')[0]}</span>
+                            <span className="block text-[#A3A3A3] text-[10px] uppercase font-bold tracking-wider mt-1">{event.date.split(' ').slice(1).join(' ')}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Content Area */}
+                      <div className="p-6 relative">
+                        <h3 className="text-white font-bold text-lg mb-4 line-clamp-2 group-hover:text-[#D61C2B] transition-colors">{event.title}</h3>
+
+                        <div className="space-y-3 mb-6">
+                          <div className="flex items-center gap-3 text-[#A3A3A3] text-sm group-hover:text-[#E0E0E0] transition-colors">
+                            <Map className="w-4 h-4 text-[#D4AF37]" />
+                            <span className="truncate">{event.location}</span>
+                          </div>
+
+                          <div className="flex items-center gap-3 text-[#A3A3A3] text-sm group-hover:text-[#E0E0E0] transition-colors">
+                            <Users className="w-4 h-4 text-[#D4AF37]" />
+                            <span>{event.attendees} tham dự</span>
+                          </div>
+                        </div>
+
+                        {/* Action Button */}
+                        <div className="absolute bottom-0 left-0 w-full p-6 pt-0 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                          <button className="w-full py-3 bg-[#D61C2B] text-white font-bold text-sm uppercase tracking-wider hover:bg-[#B31824] transition-colors flex items-center justify-center gap-2"
+                            style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}>
+                            <span>Đăng ký ngay</span>
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Mobile View All Button */}
+            <div className="mt-12 md:hidden text-center">
+              <button
+                className="px-8 py-3 border border-[#333] text-[#A3A3A3] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all uppercase text-sm font-bold tracking-widest"
+                style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
+                onClick={() => navigate('/news')}
+              >
+                Xem tất cả
+              </button>
             </div>
           </div>
         </FadeIn>
       </section>
 
-      {/* AI Assistant Preview - Slide Left */}
-      <section className="py-20 px-4 bg-gradient-to-br from-[#F5F6FA] to-white overflow-hidden">
+      {/* AI Assistant Preview - Cyberpunk Gold Style */}
+      <section className="py-20 px-4 bg-[#0F0F0F] relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37] opacity-5 blur-[150px] rounded-full pointer-events-none" />
+
         <FadeIn direction="left" duration={1500} className="w-full">
           <div className="container mx-auto max-w-4xl">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
-              <div className="text-center mb-8">
-                <div className="inline-block p-4 bg-gradient-to-br from-[#1A73E8] to-[#00D2D3] rounded-2xl mb-4">
-                  <Bot className="w-12 h-12 text-white" />
+            <div className="relative bg-[#151515] p-8 md:p-12 border border-[#333] group hover:border-[#D4AF37]/50 transition-colors duration-500"
+              style={{ clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)' }}>
+
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#D4AF37] opacity-60" />
+              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#D4AF37] opacity-60" />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#D4AF37] opacity-60" />
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#D4AF37] opacity-60" />
+
+              <div className="text-center mb-10 relative z-10">
+                {/* Gold Pulse Animation */}
+                <div className="relative inline-block">
+                  <div className="absolute inset-0 bg-[#D4AF37] rounded-full animate-ping opacity-20" />
+                  <div className="relative p-4 bg-gradient-to-br from-[#D4AF37] to-[#AA771C] rounded-xl mb-4 shadow-[0_0_30px_rgba(212,175,55,0.4)] transform rotate-45">
+                    <Bot className="w-10 h-10 text-[#0F0F0F] -rotate-45" />
+                  </div>
                 </div>
-                <h2 className="text-3xl font-bold mb-4 text-[#2D3436]">Trợ lý AI thông minh</h2>
-                <p className="text-gray-600">Hỏi đáp mọi thắc mắc về VF7 của bạn</p>
+                <h2 className="text-3xl font-bold mb-4 text-white uppercase tracking-wider">Trợ lý <span className="text-gradient-gold">AI Thông Minh</span></h2>
+                <p className="text-[#A3A3A3]">Hỏi đáp mọi thắc mắc về VF7 của bạn</p>
               </div>
 
-              {/* Sample Chat */}
-              <div className="space-y-4 mb-8">
+              {/* Sample Chat - Dark Metallic Style */}
+              <div className="space-y-6 mb-10 relative z-10">
+                {/* User Bubble */}
                 <div className="flex justify-end">
-                  <div className="bg-[#1A73E8] text-white px-6 py-3 rounded-3xl rounded-tr-sm max-w-xs">
+                  <div className="bg-[#2E2E2E] text-gray-200 px-6 py-3 border-l-4 border-[#333] max-w-xs shadow-lg"
+                    style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), 100% 100%, 0 100%, 0 10px)' }}>
                     Làm sao để tối ưu quãng đường di chuyển?
                   </div>
                 </div>
+
+                {/* AI Bubble */}
                 <div className="flex justify-start">
-                  <div className="bg-gray-100 text-gray-800 px-6 py-3 rounded-3xl rounded-tl-sm max-w-md">
-                    <p className="mb-2">Để tối ưu quãng đường với VF7, bạn nên:</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>Sử dụng chế độ Eco khi đi trong thành phố</li>
-                      <li>Duy trì tốc độ đều, tránh tăng tốc đột ngột</li>
-                      <li>Tận dụng phanh tái sinh năng lượng</li>
+                  <div className="bg-[#1A1A1A] border border-[#D4AF37]/30 text-[#E0E0E0] px-6 py-4 max-w-md relative shadow-[0_0_15px_rgba(212,175,55,0.1)]"
+                    style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))' }}>
+                    <p className="mb-3 font-medium text-[#D4AF37]">Để tối ưu quãng đường với VF7, bạn nên:</p>
+                    <ul className="space-y-2 text-sm text-[#CCCCCC]">
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#D4AF37] mt-1">›</span> Sử dụng chế độ Eco khi đi trong thành phố
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#D4AF37] mt-1">›</span> Duy trì tốc độ đều, tránh tăng tốc đột ngột
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#D4AF37] mt-1">›</span> Tận dụng phanh tái sinh năng lượng
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-0 relative z-10">
                 <input
                   type="text"
                   placeholder="Nhập câu hỏi của bạn..."
-                  className="flex-1 px-6 py-4 border-2 border-gray-200 rounded-full focus:outline-none focus:border-[#1A73E8] transition-colors"
+                  className="flex-1 px-6 py-4 bg-[#0F0F0F] border border-[#333] border-r-0 focus:outline-none focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all text-white placeholder-[#555]"
                 />
                 <button
-                  onClick={() => navigate('/community')}
-                  className="px-8 py-4 bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white rounded-full font-semibold hover:shadow-lg transition-all"
+                  onClick={() => navigate('/community?tab=ai')}
+                  className="px-10 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B38728] text-[#0F0F0F] font-bold uppercase tracking-wider hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] hover:bg-[#FFD700] transition-all"
+                  style={{ clipPath: 'polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 15px)' }}
                 >
                   Hỏi ngay
                 </button>
@@ -305,21 +473,21 @@ export function HomePage() {
         </FadeIn>
       </section>
 
-      {/* Founding Members Section - Slide Right */}
+      {/* Founding Members Section */}
       <FadeIn direction="right" duration={1500} className="w-full">
         <FoundingMembersSection />
       </FadeIn>
 
-      {/* Partners - Slide Left */}
-      <section className="py-20 px-4 bg-white overflow-hidden">
+      {/* Partners - Grayscale */}
+      <section className="py-20 px-4 bg-[#0F0F0F] border-t border-[#2E2E2E] overflow-hidden">
         <FadeIn direction="left" duration={1500} className="w-full">
           <div className="container mx-auto max-w-6xl">
-            <h2 className="text-3xl font-bold mb-12 text-center text-[#2D3436]">Đối tác của chúng tôi</h2>
+            <h2 className="text-3xl font-bold mb-12 text-center text-white">Đối tác của chúng tôi</h2>
             <div className="flex flex-wrap justify-center items-center gap-12">
               {partners.map((partner, index) => (
                 <div
                   key={index}
-                  className="px-8 py-4 text-2xl font-bold text-gray-400 hover:text-[#1A73E8] transition-colors cursor-pointer hover:scale-110 duration-300"
+                  className="px-8 py-4 text-2xl font-bold text-[#A3A3A3] hover:text-white transition-colors cursor-pointer hover:scale-110 duration-300 grayscale hover:grayscale-0"
                 >
                   {partner}
                 </div>
@@ -329,10 +497,10 @@ export function HomePage() {
         </FadeIn>
       </section>
 
-      {/* CTA - Slide Up */}
+      {/* Final CTA - Red Gradient with Gold Button */}
       <section className="relative py-32 px-4 overflow-hidden">
         <FadeIn direction="up" duration={1500} className="w-full h-full absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2D3436] to-[#1A73E8]">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#990F1B] via-[#D61C2B] to-[#0F0F0F]">
             <ImageWithFallback
               src="https://images.unsplash.com/photo-1727802329382-b9f080571270?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWV0bmFtJTIwcm9hZCUyMHRyYXZlbHxlbnwxfHx8fDE3Njk4NzczMTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
               alt="CTA Background"
@@ -345,19 +513,23 @@ export function HomePage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Sẵn sàng lăn bánh cùng chúng tôi?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 text-[#E0E0E0]">
             Tham gia ngay để nhận thông tin mới nhất và kết nối với cộng đồng
           </p>
+          {/* Gold Button - Highest Contrast */}
           <a
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-12 py-5 bg-white text-[#1A73E8] rounded-full font-bold text-lg hover:shadow-2xl transition-all transform hover:scale-105 inline-block animate-pulse-glow"
+            className="px-12 py-5 bg-[#D4AF37] text-[#0F0F0F] rounded-full font-bold text-lg shadow-[0_0_40px_rgba(212,175,55,0.5)] hover:shadow-[0_0_60px_rgba(212,175,55,0.7)] hover:scale-105 transition-all transform inline-block"
           >
             Đăng ký thành viên
           </a>
         </FadeIn>
       </section>
+
+      {/* Animated Chatbot Car */}
+      <ChatbotCar />
     </div>
   );
 }

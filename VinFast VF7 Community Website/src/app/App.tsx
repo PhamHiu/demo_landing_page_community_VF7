@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Header />
-      <main className="flex-1 flex flex-col relative w-full">
+      <main className="flex-1 flex flex-col relative w-full pt-16">
         <AnimatedRoutes />
       </main>
       {!isMapPage && <Footer />}
