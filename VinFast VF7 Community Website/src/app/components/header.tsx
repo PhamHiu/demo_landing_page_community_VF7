@@ -40,15 +40,17 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#1C1C1C]/90 backdrop-blur-md border-b border-[#2E2E2E]">
       <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" onClick={(e) => handleLinkClick(e, '/')} className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#1A73E8] to-[#00D2D3] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">VF7</span>
-            </div>
-            <span className="hidden md:block font-bold text-xl text-[#2D3436]">VinFast VF7</span>
+            <img
+              src="/logo-vf7.svg"
+              alt="VF7 Community Logo"
+              className="h-10 w-auto"
+            />
+            <span className="hidden md:block font-bold text-xl text-white">VinFast VF7</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,13 +61,13 @@ export function Header() {
                 to={link.path}
                 onClick={(e) => handleLinkClick(e, link.path)}
                 className={`relative transition-colors ${isActive(link.path)
-                  ? 'text-[#1A73E8]'
-                  : 'text-[#2D3436] hover:text-[#1A73E8]'
+                  ? 'text-[#D4AF37]'
+                  : 'text-[#E0E0E0] hover:text-[#D4AF37]'
                   }`}
               >
                 {link.label}
                 {isActive(link.path) && (
-                  <div className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-[#1A73E8]" />
+                  <div className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-[#D4AF37]" />
                 )}
               </Link>
             ))}
@@ -77,7 +79,7 @@ export function Header() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#2D3436] hover:text-[#1877F2] transition-colors"
+              className="text-[#A3A3A3] hover:text-[#1877F2] transition-colors"
               title="Facebook"
             >
               <Facebook size={24} />
@@ -86,7 +88,7 @@ export function Header() {
               href="https://zalo.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#2D3436] hover:text-[#0068FF] transition-colors"
+              className="text-[#A3A3A3] hover:text-[#0068FF] transition-colors"
               title="Zalo"
             >
               <ZaloIcon className="w-6 h-6" />
@@ -95,7 +97,7 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X /> : <Menu />}
@@ -104,14 +106,14 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="md:hidden py-4 border-t border-[#2E2E2E]">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={`block py-3 transition-colors ${isActive(link.path)
-                  ? 'text-[#1A73E8] font-medium'
-                  : 'text-[#2D3436]'
+                  ? 'text-[#D4AF37] font-medium'
+                  : 'text-[#E0E0E0]'
                   }`}
                 onClick={(e) => handleLinkClick(e, link.path)}
               >
@@ -120,12 +122,12 @@ export function Header() {
             ))}
 
             {/* Mobile Social Icons */}
-            <div className="flex items-center justify-center gap-6 py-4 border-t border-gray-100 mt-2">
+            <div className="flex items-center justify-center gap-6 py-4 border-t border-[#2E2E2E] mt-2">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#2D3436] hover:text-[#1877F2]"
+                className="flex items-center gap-2 text-[#A3A3A3] hover:text-[#1877F2]"
               >
                 <Facebook size={24} />
                 <span className="font-medium">Facebook</span>
@@ -134,7 +136,7 @@ export function Header() {
                 href="https://zalo.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#2D3436] hover:text-[#0068FF]"
+                className="flex items-center gap-2 text-[#A3A3A3] hover:text-[#0068FF]"
               >
                 <ZaloIcon className="w-6 h-6" />
                 <span className="font-medium">Zalo</span>

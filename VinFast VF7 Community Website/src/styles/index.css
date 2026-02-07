@@ -152,3 +152,125 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Metallic Theme Utilities */
+.text-gradient-gold {
+  background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(to right, #8C8C8C, #E6E6E6, #8C8C8C);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-metallic-dark {
+  background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+}
+
+.border-gradient-gold {
+  border-image: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C) 1;
+}
+
+.shadow-glow-red {
+  box-shadow: 0 0 20px rgba(214, 28, 43, 0.4);
+}
+
+.shadow-glow-gold {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Angular Frame Clip Path */
+.clip-angular-frame {
+  clip-path: polygon(20px 0, 100% 0,
+      100% calc(100% - 20px), calc(100% - 20px) 100%,
+      0 100%, 0 20px);
+}
+
+/* 3D Transform Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Custom Dark Map */
+.custom-dark-map {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* Chatbot Car Animations */
+@keyframes drive-in {
+  0% {
+    transform: translateX(100vw) skewX(-10deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: translateX(-20px) skewX(5deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translateX(10px) skewX(-2deg);
+  }
+
+  100% {
+    transform: translateX(0) skewX(0);
+  }
+}
+
+.animate-drive-in {
+  animation: drive-in 1.5s ease-out forwards;
+}
+
+@keyframes bounce-gentle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+/* Running Gold Border Animation */
+@keyframes gold-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.running-border-on-hover {
+  background: linear-gradient(to bottom right, #444, #222, #444);
+  background-size: 200% 200%;
+  transition: all 0.5s ease;
+}
+
+.group:hover .running-border-on-hover {
+  background: linear-gradient(90deg, #D4AF37, #FCF6BA, #B38728, #FBF5B7, #AA771C, #D4AF37);
+  background-size: 300% 300%;
+  animation: gold-flow 3s ease infinite;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}

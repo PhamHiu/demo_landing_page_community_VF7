@@ -37,8 +37,8 @@ const mockEvents: Event[] = [
     attendees: 250,
     content: `
       <p class="mb-4">Chúng tôi hân hạnh mời quý khách hàng tham dự chương trình lái thử xe VinFast VF7 - mẫu xe điện thông minh mới nhất của chúng tôi. Đây là cơ hội tuyệt vời để trải nghiệm trực tiếp khả năng vận hành mạnh mẽ, công nghệ tiên tiến và thiết kế đột phá của VF7.</p>
-      <h4 class="text-lg font-bold mb-2">Nội dung chương trình:</h4>
-      <ul class="list-disc list-inside mb-4 space-y-1">
+      <h4 class="text-lg font-bold mb-2 text-[#D4AF37]">Nội dung chương trình:</h4>
+      <ul class="list-disc list-inside mb-4 space-y-1 text-[#CCCCCC]">
         <li>Giới thiệu chi tiết về VF7 và các công nghệ mới.</li>
         <li>Trải nghiệm lái thử trên đường thử chuyên dụng.</li>
         <li>Tư vấn trực tiếp từ các chuyên gia kỹ thuật.</li>
@@ -56,8 +56,8 @@ const mockEvents: Event[] = [
     date: '10/02/2026',
     content: `
       <p class="mb-4">VinFast chính thức công bố bản cập nhật phần mềm OTA (Over-The-Air) mới nhất cho dòng xe VF7. Bản cập nhật này tập trung vào việc nâng cao trải nghiệm người dùng và tối ưu hóa hiệu suất xe.</p>
-      <h4 class="text-lg font-bold mb-2">Các tính năng nổi bật:</h4>
-      <ul class="list-disc list-inside mb-4 space-y-1">
+      <h4 class="text-lg font-bold mb-2 text-[#D4AF37]">Các tính năng nổi bật:</h4>
+      <ul class="list-disc list-inside mb-4 space-y-1 text-[#CCCCCC]">
         <li><strong>Trợ lý ảo AI nâng cao:</strong> Nhận diện giọng nói tự nhiên hơn, hỗ trợ nhiều câu lệnh điều khiển xe và tra cứu thông tin.</li>
         <li><strong>Tối ưu hóa pin:</strong> Cải thiện thuật toán quản lý năng lượng, giúp tăng quãng đường di chuyển thêm 5% trong điều kiện thực tế.</li>
         <li><strong>Giao diện giải trí mới:</strong> Thiết kế hiện đại, dễ sử dụng và tích hợp thêm các ứng dụng giải trí phổ biến.</li>
@@ -77,8 +77,8 @@ const mockEvents: Event[] = [
     registered: true,
     content: `
         <p class="mb-4">Chào mừng các thành viên cộng đồng VF7 Hà Nội tham gia buổi Offline gặp gỡ đầu xuân. Đây là dịp để chúng ta cùng nhau chia sẻ niềm đam mê xe điện, kinh nghiệm sử dụng xe và gắn kết tình bạn.</p>
-        <p class="mb-4"><strong>Thời gian:</strong> 09:00 - 12:00, Chủ Nhật ngày 08/02/2026.</p>
-        <p class="mb-4"><strong>Địa điểm:</strong> Café The Coffee House - Hồ Tây (View bao trọn hồ).</p>
+        <p class="mb-4"><strong class="text-[#D4AF37]">Thời gian:</strong> 09:00 - 12:00, Chủ Nhật ngày 08/02/2026.</p>
+        <p class="mb-4"><strong class="text-[#D4AF37]">Địa điểm:</strong> Café The Coffee House - Hồ Tây (View bao trọn hồ).</p>
         <p>Chi phí tham dự: Campuchia (chia đều). Đã có 45 thành viên đăng ký, hãy nhanh tay để giữ chỗ nhé!</p>
     `
   },
@@ -182,11 +182,11 @@ export function NewsEventsPage() {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'event':
-        return 'bg-[#1A73E8] text-white';
+        return 'bg-[#1A73E8] text-white shadow-[0_0_10px_rgba(26,115,232,0.4)]';
       case 'news':
-        return 'bg-[#00D2D3] text-white';
+        return 'bg-[#00D2D3] text-black shadow-[0_0_10px_rgba(0,210,211,0.4)]';
       case 'offline':
-        return 'bg-[#2ECC71] text-white';
+        return 'bg-[#00C853] text-white shadow-[0_0_10px_rgba(0,200,83,0.4)]';
       default:
         return 'bg-gray-500 text-white';
     }
@@ -237,72 +237,74 @@ export function NewsEventsPage() {
 
   if (selectedEvent) {
     return (
-      <div className="min-h-screen bg-[#F5F6FA] pt-24 pb-12">
+      <div className="min-h-screen bg-[#0F0F0F] pt-24 pb-12 text-[#E0E0E0]">
         <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
           {/* Back Button */}
           <button
             onClick={handleBack}
-            className="flex items-center gap-2 text-gray-600 hover:text-[#1A73E8] mb-6 transition-colors group"
+            className="flex items-center gap-2 text-[#A3A3A3] hover:text-[#D4AF37] mb-6 transition-colors group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium">Quay lại danh sách</span>
+            <span className="font-bold uppercase tracking-wider text-sm">Quay lại danh sách</span>
           </button>
 
           {/* Detail Content */}
-          <div className="bg-white rounded-3xl overflow-hidden shadow-sm">
+          <div className="bg-[#151515] rounded-sm overflow-hidden shadow-2xl border border-[#333]" style={{ clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)' }}>
             <div className="relative h-[300px] md:h-[400px]">
               <ImageWithFallback
                 src={selectedEvent.image}
                 alt={selectedEvent.title}
                 className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#151515] to-transparent opacity-80" />
               <div className="absolute top-6 left-6">
-                <span className={`px-4 py-1.5 ${getTypeColor(selectedEvent.type)} rounded-full text-sm font-bold shadow-md`}>
+                <span className={`px-4 py-1.5 ${getTypeColor(selectedEvent.type)} rounded-sm text-sm font-bold uppercase tracking-wider`}>
                   {getTypeLabel(selectedEvent.type)}
                 </span>
               </div>
             </div>
 
-            <div className="p-8 md:p-12">
-              <h1 className="text-3xl md:text-4xl font-bold text-[#2D3436] mb-6">
+            <div className="p-8 md:p-12 -mt-20 relative z-10">
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight uppercase tracking-wide drop-shadow-md">
                 {selectedEvent.title}
               </h1>
 
-              <div className="flex flex-wrap gap-6 mb-8 text-gray-600 border-b border-gray-100 pb-8">
+              <div className="flex flex-wrap gap-6 mb-8 text-[#CCC] border-b border-[#333] pb-8">
                 <div className="flex items-center gap-2">
-                  <CalendarIcon className="w-5 h-5 text-[#1A73E8]" />
+                  <CalendarIcon className="w-5 h-5 text-[#D4AF37]" />
                   <span className="font-medium">{selectedEvent.date}</span>
                 </div>
                 {selectedEvent.location && (
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#1A73E8]" />
+                    <MapPin className="w-5 h-5 text-[#D4AF37]" />
                     <span className="font-medium">{selectedEvent.location}</span>
                   </div>
                 )}
                 {selectedEvent.attendees && (
                   <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-[#1A73E8]" />
+                    <Users className="w-5 h-5 text-[#D4AF37]" />
                     <span className="font-medium">{selectedEvent.attendees} người tham gia</span>
                   </div>
                 )}
               </div>
 
               <div
-                className="prose prose-lg max-w-none text-gray-700"
+                className="prose prose-lg max-w-none text-[#CCCCCC] prose-headings:text-white prose-strong:text-[#D4AF37] prose-a:text-[#1A73E8]"
                 dangerouslySetInnerHTML={{ __html: selectedEvent.content || '' }}
               />
 
               {selectedEvent.type !== 'news' && (
-                <div className="mt-12 pt-8 border-t border-gray-100 flex justify-center">
+                <div className="mt-12 pt-8 border-t border-[#333] flex justify-center">
                   <button
                     onClick={handleRegisterClick}
-                    className={`px-10 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 ${selectedEvent.registered
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white'
+                    className={`px-12 py-4 rounded-sm font-bold text-lg uppercase tracking-widest transition-all shadow-lg hover:shadow-[0_0_25px_rgba(214,28,43,0.5)] transform hover:-translate-y-1 ${selectedEvent.registered
+                      ? 'bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700'
+                      : 'bg-gradient-to-r from-[#D61C2B] to-[#990F1B] text-white'
                       }`}
+                    style={{ clipPath: 'polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 15px)' }}
                     disabled={selectedEvent.registered}
                   >
-                    {selectedEvent.registered ? 'Bạn đã đăng ký sự kiện này' : 'Đăng ký tham gia ngay'}
+                    {selectedEvent.registered ? 'Bạn đã đăng ký' : 'Đăng ký tham gia ngay'}
                   </button>
                 </div>
               )}
@@ -312,17 +314,17 @@ export function NewsEventsPage() {
 
         {/* Registration Modal */}
         {showRegistrationModal && (
-          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-white rounded-2xl w-full max-w-2xl shadow-xl overflow-hidden animate-in zoom-in-95 duration-200 my-8">
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto backdrop-blur-md animate-in fade-in duration-200">
+            <div className="bg-[#151515] border border-[#333] rounded-sm w-full max-w-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 my-8" style={{ clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)' }}>
               {/* Modal Header */}
-              <div className="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+              <div className="px-8 py-6 border-b border-[#333] flex justify-between items-center bg-[#1A1A1A]">
                 <div>
-                  <h2 className="text-2xl font-bold text-[#2D3436]">Đăng ký tham gia</h2>
-                  <p className="text-sm text-gray-500 mt-1">{selectedEvent.title}</p>
+                  <h2 className="text-2xl font-bold text-white uppercase tracking-wider">Đăng ký tham gia</h2>
+                  <p className="text-sm text-[#888] mt-1">{selectedEvent.title}</p>
                 </div>
                 <button
                   onClick={() => setShowRegistrationModal(false)}
-                  className="p-2 hover:bg-gray-200 rounded-full transition-colors text-gray-500"
+                  className="p-2 hover:bg-[#333] rounded-sm transition-colors text-[#888] hover:text-white"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -332,24 +334,24 @@ export function NewsEventsPage() {
               <form onSubmit={handleRegisterSubmit} className="p-8 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">Họ và tên <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-bold text-[#A3A3A3] uppercase tracking-wide">Họ và tên <span className="text-[#D61C2B]">*</span></label>
                     <input
                       type="text"
                       required
                       value={registrationForm.fullName}
                       onChange={(e) => setRegistrationForm({ ...registrationForm, fullName: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A73E8] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#D4AF37] text-white transition-all"
                       placeholder="Nhập họ tên của bạn"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">Số điện thoại <span className="text-red-500">*</span></label>
+                    <label className="block text-sm font-bold text-[#A3A3A3] uppercase tracking-wide">Số điện thoại <span className="text-[#D61C2B]">*</span></label>
                     <input
                       type="tel"
                       required
                       value={registrationForm.phone}
                       onChange={(e) => setRegistrationForm({ ...registrationForm, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A73E8] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#D4AF37] text-white transition-all"
                       placeholder="Nhập số điện thoại"
                     />
                   </div>
@@ -357,22 +359,22 @@ export function NewsEventsPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <label className="block text-sm font-bold text-[#A3A3A3] uppercase tracking-wide">Email</label>
                     <input
                       type="email"
                       value={registrationForm.email}
                       onChange={(e) => setRegistrationForm({ ...registrationForm, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A73E8] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#D4AF37] text-white transition-all"
                       placeholder="example@email.com"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">Loại xe đang sở hữu</label>
+                    <label className="block text-sm font-bold text-[#A3A3A3] uppercase tracking-wide">Loại xe đang sở hữu</label>
                     <div className="relative">
                       <select
                         value={registrationForm.carModel}
                         onChange={(e) => setRegistrationForm({ ...registrationForm, carModel: e.target.value })}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A73E8] focus:bg-white transition-all appearance-none text-gray-700"
+                        className="w-full px-4 py-3 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#D4AF37] text-white transition-all appearance-none cursor-pointer"
                       >
                         <option value="" disabled>Chọn dòng xe</option>
                         <option value="VF 3">VinFast VF 3</option>
@@ -389,7 +391,7 @@ export function NewsEventsPage() {
                         <option value="Klara">VinFast Klara (Xe máy điện)</option>
                         <option value="Other">Khác</option>
                       </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#666]">
                         <ChevronRight className="w-5 h-5 rotate-90" />
                       </div>
                     </div>
@@ -397,21 +399,21 @@ export function NewsEventsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Thông tin bổ sung</label>
+                  <label className="block text-sm font-bold text-[#A3A3A3] uppercase tracking-wide">Thông tin bổ sung</label>
                   <textarea
                     rows={3}
                     value={registrationForm.note}
                     onChange={(e) => setRegistrationForm({ ...registrationForm, note: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A73E8] focus:bg-white transition-all resize-none"
+                    className="w-full px-4 py-3 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#D4AF37] text-white transition-all resize-none"
                     placeholder="Ghi chú thêm cho ban tổ chức..."
                   />
                 </div>
 
                 {/* Captcha */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Xác thực Captcha <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-bold text-[#A3A3A3] uppercase tracking-wide">Xác thực Captcha <span className="text-[#D61C2B]">*</span></label>
                   <div className="flex items-center gap-4">
-                    <span className="font-bold text-lg bg-blue-50 text-[#1A73E8] px-4 py-2 rounded-lg border border-blue-100 select-none">
+                    <span className="font-bold text-lg bg-[#1A1A1A] text-[#D4AF37] px-4 py-2 rounded-sm border border-[#333] select-none tracking-widest font-mono">
                       {captcha.question}
                     </span>
                     <input
@@ -422,24 +424,25 @@ export function NewsEventsPage() {
                         setCaptchaInput(e.target.value);
                         setCaptchaError(false);
                       }}
-                      className={`w-32 px-4 py-3 bg-white border rounded-xl focus:outline-none transition-all ${captchaError ? 'border-red-500 bg-red-50' : 'border-gray-200 focus:border-[#1A73E8]'}`}
+                      className={`w-32 px-4 py-3 bg-[#0F0F0F] border rounded-sm focus:outline-none transition-all text-white ${captchaError ? 'border-red-500' : 'border-[#333] focus:border-[#D4AF37]'}`}
                       placeholder="Kết quả"
                     />
                   </div>
-                  {captchaError && <p className="text-sm text-red-500 mt-1">Kết quả không chính xác, vui lòng thử lại!</p>}
+                  {captchaError && <p className="text-sm text-red-500 mt-1 font-bold">Kết quả không chính xác!</p>}
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 flex justify-end gap-4">
+                <div className="pt-6 border-t border-[#333] flex justify-end gap-4">
                   <button
                     type="button"
                     onClick={() => setShowRegistrationModal(false)}
-                    className="px-6 py-3 rounded-xl font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+                    className="px-6 py-3 rounded-sm font-bold text-[#888] border border-[#333] hover:text-white hover:border-[#666] transition-colors"
                   >
                     Hủy bỏ
                   </button>
                   <button
                     type="submit"
-                    className="px-8 py-3 bg-[#1A73E8] text-white rounded-xl font-medium hover:bg-[#1557B0] transition-colors shadow-lg shadow-blue-500/30"
+                    className="px-8 py-3 bg-gradient-to-r from-[#D61C2B] to-[#990F1B] text-white rounded-sm font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(214,28,43,0.4)] transition-all"
+                    style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                   >
                     Gửi đăng ký
                   </button>
@@ -452,15 +455,15 @@ export function NewsEventsPage() {
         {/* Notification Toast */}
         {notification && notification.show && (
           <div className="fixed top-24 right-8 z-[60] animate-in slide-in-from-right duration-300">
-            <div className="bg-white px-6 py-4 rounded-xl shadow-2xl border border-gray-100 flex items-center gap-4">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+            <div className={`bg-[#1A1A1A] px-6 py-4 rounded-sm shadow-[0_0_20px_rgba(0,200,83,0.2)] border border-[#00C853] flex items-center gap-4`}>
+              <div className="w-10 h-10 bg-[#00C853]/20 rounded-full flex items-center justify-center text-[#00C853] border border-[#00C853]/30">
                 <CheckCircle className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-bold text-[#2D3436]">Thành công!</h4>
-                <p className="text-sm text-gray-500">{notification.message}</p>
+                <h4 className="font-bold text-white uppercase tracking-wider">Thành công!</h4>
+                <p className="text-sm text-[#AAA]">{notification.message}</p>
               </div>
-              <button onClick={() => setNotification(null)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setNotification(null)} className="text-[#666] hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -478,34 +481,40 @@ export function NewsEventsPage() {
   const eventDates = mockEvents.map((event) => parseInt(event.date.split('/')[0]));
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA] pt-16">
+    <div className="min-h-screen bg-[#0F0F0F] pt-16 text-[#E0E0E0]">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1A73E8] opacity-5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D61C2B] opacity-5 blur-[150px] rounded-full pointer-events-none" />
+
       {/* Featured Banner */}
-      <div className="relative h-[400px] overflow-hidden">
+      <div className="relative h-[450px] overflow-hidden">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600"
           alt="Featured event"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
-          <div className="container mx-auto px-4 lg:px-8 pb-12">
-            <span className="inline-block px-4 py-2 bg-[#1A73E8] text-white rounded-full mb-4">
-              Sự kiện nổi bật
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              VinFast VF7 Test Drive Tour 2026
-            </h1>
-            <p className="text-xl text-white/90 mb-6 max-w-2xl">
-              Trải nghiệm lái thử VF7 cùng đội ngũ chuyên gia và nhận nhiều ưu đãi hấp dẫn
-            </p>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-white text-[#1A73E8] rounded-full font-semibold hover:shadow-xl transition-all inline-flex items-center gap-2"
-            >
-              <span>Đăng ký tham gia</span>
-              <ChevronRight className="w-5 h-5" />
-            </a>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-[#0F0F0F]/60 to-transparent flex items-end">
+          <div className="container mx-auto px-4 lg:px-8 pb-16">
+            <div className="animate-in slide-in-from-bottom duration-700 fade-in">
+              <span className="inline-block px-4 py-1 bg-[#D4AF37] text-black rounded-sm mb-6 text-xs font-bold uppercase tracking-widest">
+                Sự kiện nổi bật
+              </span>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 uppercase tracking-wide drop-shadow-2xl max-w-4xl leading-tight">
+                VinFast VF7 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A73E8] to-[#00F0FF]">Test Drive Tour</span> 2026
+              </h1>
+              <p className="text-xl text-[#CCC] mb-8 max-w-2xl font-light">
+                Trải nghiệm lái thử VF7 cùng đội ngũ chuyên gia và nhận nhiều ưu đãi hấp dẫn
+              </p>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); handleEventClick(mockEvents[0]); }}
+                className="px-10 py-4 bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black rounded-sm font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(212,175,55,0.6)] transition-all inline-flex items-center gap-3 group"
+                style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
+              >
+                <span>Đăng ký tham gia</span>
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -515,41 +524,45 @@ export function NewsEventsPage() {
           {/* Main Content */}
           <div className="lg:col-span-3">
             {/* Filter Bar & Search */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+            <div className="bg-[#151515] rounded-sm p-4 shadow-sm mb-10 flex flex-col md:flex-row gap-4 justify-between items-center border border-[#333]" style={{ clipPath: 'polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px)' }}>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedFilter('all')}
-                  className={`px-5 py-2 rounded-full font-medium text-sm transition-all ${selectedFilter === 'all'
-                    ? 'bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  className={`px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${selectedFilter === 'all'
+                    ? 'bg-[#D4AF37] text-black border-[#D4AF37]'
+                    : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:text-white hover:border-[#666]'
                     }`}
+                  style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                 >
                   Tất cả
                 </button>
                 <button
                   onClick={() => setSelectedFilter('news')}
-                  className={`px-5 py-2 rounded-full font-medium text-sm transition-all ${selectedFilter === 'news'
-                    ? 'bg-[#00D2D3] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  className={`px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${selectedFilter === 'news'
+                    ? 'bg-[#00D2D3] text-black border-[#00D2D3] shadow-[0_0_10px_rgba(0,210,211,0.4)]'
+                    : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:text-white hover:border-[#666]'
                     }`}
+                  style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                 >
                   Tin tức
                 </button>
                 <button
                   onClick={() => setSelectedFilter('event')}
-                  className={`px-5 py-2 rounded-full font-medium text-sm transition-all ${selectedFilter === 'event'
-                    ? 'bg-[#1A73E8] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  className={`px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${selectedFilter === 'event'
+                    ? 'bg-[#1A73E8] text-white border-[#1A73E8] shadow-[0_0_10px_rgba(26,115,232,0.4)]'
+                    : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:text-white hover:border-[#666]'
                     }`}
+                  style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                 >
                   Sự kiện
                 </button>
                 <button
                   onClick={() => setSelectedFilter('offline')}
-                  className={`px-5 py-2 rounded-full font-medium text-sm transition-all ${selectedFilter === 'offline'
-                    ? 'bg-[#2ECC71] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  className={`px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${selectedFilter === 'offline'
+                    ? 'bg-[#2ECC71] text-white border-[#2ECC71] shadow-[0_0_10px_rgba(46,204,113,0.4)]'
+                    : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:text-white hover:border-[#666]'
                     }`}
+                  style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                 >
                   Offline
                 </button>
@@ -557,7 +570,7 @@ export function NewsEventsPage() {
 
               {/* Search Bar */}
               <div className="relative w-full md:w-auto md:min-w-[300px] z-20">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666]" />
                 <input
                   type="text"
                   placeholder="Tìm kiếm tin tức, sự kiện..."
@@ -568,12 +581,12 @@ export function NewsEventsPage() {
                   }}
                   onFocus={() => setShowSuggestions(true)}
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                  className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1A73E8] focus:bg-white transition-all"
+                  className="w-full pl-12 pr-4 py-2.5 bg-[#0F0F0F] border border-[#333] rounded-sm text-sm focus:outline-none focus:border-[#D4AF37] text-white placeholder-[#555] transition-all"
                 />
 
                 {/* Suggestions Dropdown */}
                 {showSuggestions && searchQuery && suggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#1A1A1A] rounded-sm shadow-xl border border-[#333] overflow-hidden animate-in fade-in zoom-in-95 duration-200 z-50">
                     {suggestions.map(event => (
                       <button
                         key={event.id}
@@ -581,12 +594,12 @@ export function NewsEventsPage() {
                           setSearchQuery(event.title);
                           setShowSuggestions(false);
                         }}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-start gap-3 border-b border-gray-50 last:border-0"
+                        className="w-full text-left px-4 py-3 hover:bg-[#252525] transition-colors flex items-start gap-3 border-b border-[#333] last:border-0"
                       >
-                        <Search className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+                        <Search className="w-4 h-4 text-[#666] mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm text-[#2D3436] font-medium line-clamp-1">{event.title}</p>
-                          <p className="text-xs text-gray-500 line-clamp-1">{event.description}</p>
+                          <p className="text-sm text-[#E0E0E0] font-medium line-clamp-1">{event.title}</p>
+                          <p className="text-xs text-[#888] line-clamp-1">{event.description}</p>
                         </div>
                       </button>
                     ))}
@@ -601,57 +614,58 @@ export function NewsEventsPage() {
                 <div
                   key={event.id}
                   onClick={() => handleEventClick(event)}
-                  className="bg-white rounded-3xl shadow-sm overflow-hidden hover:shadow-xl transition-all group cursor-pointer"
+                  className="bg-[#151515] rounded-sm shadow-sm overflow-hidden hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all group cursor-pointer border border-[#333] hover:border-[#D4AF37]/50"
                 >
                   <div className="relative">
                     <ImageWithFallback
                       src={event.image}
                       alt={event.title}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 ${getTypeColor(event.type)} rounded-full text-sm font-medium`}>
+                      <span className={`px-3 py-1 ${getTypeColor(event.type)} rounded-sm text-xs font-bold uppercase tracking-wider`}>
                         {getTypeLabel(event.type)}
                       </span>
                     </div>
                     {event.type === 'event' && (
-                      <div className="absolute top-4 right-4 bg-white rounded-2xl px-3 py-2 text-center shadow-lg">
-                        <div className="text-2xl font-bold text-[#1A73E8]">
+                      <div className="absolute top-4 right-4 bg-[#1A1A1A]/90 backdrop-blur-sm rounded-sm px-3 py-2 text-center border border-[#333]">
+                        <div className="text-2xl font-bold text-[#D4AF37]">
                           {event.date.split('/')[0]}
                         </div>
-                        <div className="text-xs text-gray-600">Tháng 2</div>
+                        <div className="text-[10px] text-[#AAA] uppercase">Tháng 2</div>
                       </div>
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#2D3436] mb-2 group-hover:text-[#1A73E8] transition-colors">
+                    <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors line-clamp-2 uppercase tracking-wide">
                       {event.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">{event.description}</p>
-                    <div className="space-y-2 text-sm text-gray-500">
+                    <p className="text-[#888] mb-4 text-sm line-clamp-2">{event.description}</p>
+                    <div className="space-y-2 text-xs text-[#666] border-t border-[#222] pt-4">
                       <div className="flex items-center gap-2">
-                        <CalendarIcon className="w-4 h-4" />
+                        <CalendarIcon className="w-3.5 h-3.5 text-[#1A73E8]" />
                         <span>{event.date}</span>
                       </div>
                       {event.location && (
                         <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" />
+                          <MapPin className="w-3.5 h-3.5 text-[#1A73E8]" />
                           <span>{event.location}</span>
                         </div>
                       )}
                       {event.attendees && (
                         <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4" />
+                          <Users className="w-3.5 h-3.5 text-[#1A73E8]" />
                           <span>{event.attendees} người tham gia</span>
                         </div>
                       )}
                     </div>
                     {event.type !== 'news' && (
                       <button
-                        className={`w-full mt-4 px-6 py-3 rounded-full font-medium transition-all ${event.registered
-                          ? 'bg-gray-100 text-gray-600'
-                          : 'bg-gradient-to-r from-[#1A73E8] to-[#00D2D3] text-white hover:shadow-lg'
+                        className={`w-full mt-5 px-6 py-2.5 rounded-sm font-bold text-sm uppercase tracking-wider transition-all ${event.registered
+                          ? 'bg-[#222] text-[#666] border border-[#333]'
+                          : 'bg-transparent border border-[#00D2D3] text-[#00D2D3] hover:bg-[#00D2D3] hover:text-black hover:shadow-[0_0_15px_rgba(0,210,211,0.4)]'
                           }`}
+                        style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                       >
                         {event.registered ? 'Đã đăng ký' : 'Tham gia'}
                       </button>
@@ -667,7 +681,7 @@ export function NewsEventsPage() {
                 <div
                   key={event.id}
                   onClick={() => handleEventClick(event)}
-                  className="bg-white rounded-3xl shadow-sm overflow-hidden hover:shadow-xl transition-all cursor-pointer"
+                  className="bg-[#151515] rounded-sm shadow-sm overflow-hidden border border-[#333] active:border-[#D4AF37] transition-all cursor-pointer"
                 >
                   <div className="relative">
                     <ImageWithFallback
@@ -676,22 +690,22 @@ export function NewsEventsPage() {
                       className="w-full h-48 object-cover"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 ${getTypeColor(event.type)} rounded-full text-sm font-medium`}>
+                      <span className={`px-3 py-1 ${getTypeColor(event.type)} rounded-sm text-xs font-bold uppercase tracking-wider`}>
                         {getTypeLabel(event.type)}
                       </span>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#2D3436] mb-2">{event.title}</h3>
-                    <p className="text-gray-600 mb-4">{event.description}</p>
-                    <div className="space-y-2 text-sm text-gray-500">
+                  <div className="p-5">
+                    <h3 className="text-xl font-bold text-white mb-2 uppercase tracking-wide">{event.title}</h3>
+                    <p className="text-[#888] mb-4 text-sm">{event.description}</p>
+                    <div className="space-y-2 text-xs text-[#666]">
                       <div className="flex items-center gap-2">
-                        <CalendarIcon className="w-4 h-4" />
+                        <CalendarIcon className="w-3.5 h-3.5" />
                         <span>{event.date}</span>
                       </div>
                       {event.location && (
                         <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" />
+                          <MapPin className="w-3.5 h-3.5" />
                           <span>{event.location}</span>
                         </div>
                       )}
@@ -704,15 +718,15 @@ export function NewsEventsPage() {
 
           {/* Sidebar - Calendar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl p-6 shadow-sm sticky top-24">
-              <h3 className="font-bold text-[#2D3436] mb-4 flex items-center gap-2">
-                <CalendarIcon className="w-5 h-5 text-[#1A73E8]" />
+            <div className="bg-[#151515] rounded-sm p-6 shadow-sm sticky top-24 border border-[#333]" style={{ clipPath: 'polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px)' }}>
+              <h3 className="font-bold text-white mb-6 flex items-center gap-2 uppercase tracking-wider">
+                <CalendarIcon className="w-5 h-5 text-[#D4AF37]" />
                 Lịch sự kiện
               </h3>
-              <div className="text-center mb-4">
-                <div className="text-2xl font-bold text-[#2D3436]">Tháng 2, 2026</div>
+              <div className="text-center mb-6 border-b border-[#333] pb-4">
+                <div className="text-xl font-bold text-[#E0E0E0]">Tháng 2, 2026</div>
               </div>
-              <div className="grid grid-cols-7 gap-2 text-center text-xs font-medium text-gray-500 mb-2">
+              <div className="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-[#888] mb-3 uppercase">
                 <div>CN</div>
                 <div>T2</div>
                 <div>T3</div>
@@ -731,19 +745,19 @@ export function NewsEventsPage() {
                   return (
                     <div
                       key={day}
-                      className={`aspect-square flex items-center justify-center rounded-lg text-sm ${hasEvent
-                        ? 'bg-[#1A73E8] text-white font-bold'
-                        : 'text-gray-700 hover:bg-gray-100'
-                        } cursor-pointer transition-colors`}
+                      className={`aspect-square flex items-center justify-center rounded-sm text-sm ${hasEvent
+                        ? 'bg-[#1A73E8] text-white font-bold shadow-[0_0_10px_rgba(26,115,232,0.5)]'
+                        : 'text-[#666] hover:bg-[#222] hover:text-white'
+                        } cursor-pointer transition-colors border ${hasEvent ? 'border-[#1A73E8]' : 'border-transparent'}`}
                     >
                       {day}
                     </div>
                   );
                 })}
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-100">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <div className="w-3 h-3 bg-[#1A73E8] rounded-full" />
+              <div className="mt-6 pt-6 border-t border-[#333]">
+                <div className="flex items-center gap-2 text-xs text-[#888]">
+                  <div className="w-2 h-2 bg-[#1A73E8] rounded-full shadow-[0_0_5px_rgba(26,115,232,0.8)]" />
                   <span>Ngày có sự kiện</span>
                 </div>
               </div>
