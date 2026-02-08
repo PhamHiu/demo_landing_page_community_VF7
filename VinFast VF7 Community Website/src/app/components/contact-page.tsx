@@ -25,6 +25,11 @@ const admins: Admin[] = [
     role: 'Hỗ trợ kỹ thuật',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200',
   },
+  {
+    name: 'Phạm Văn Minh',
+    role: 'Quản trị viên',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200',
+  },
 ];
 
 export function ContactPage() {

@@ -319,7 +319,7 @@ export function CommunityPage() {
   return (
     <div className="min-h-screen bg-[#0F0F0F] pt-16 relative text-[#E0E0E0]">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1A73E8] opacity-5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D61C2B] opacity-5 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D4AF37] opacity-5 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-4 py-8 max-w-7xl relative z-10">
@@ -357,13 +357,13 @@ export function CommunityPage() {
             </button>
             <button
               onClick={() => setActiveTab('ai')}
-              className={`flex items-center gap-2 pb-4 px-2 font-medium transition-all relative ${activeTab === 'ai' ? 'text-[#00F0FF]' : 'text-[#888] hover:text-white'
+              className={`flex items-center gap-2 pb-4 px-2 font-medium transition-all relative ${activeTab === 'ai' ? 'text-[#D4AF37]' : 'text-[#888] hover:text-white'
                 }`}
             >
               <Bot className="w-5 h-5" />
               <span className="uppercase tracking-wide text-sm font-bold">Trợ lý AI</span>
               {activeTab === 'ai' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00F0FF] shadow-[0_0_10px_rgba(0,240,255,0.5)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,0.5)]" />
               )}
             </button>
           </div>
@@ -464,7 +464,7 @@ export function CommunityPage() {
                     <button
                       key={cat.value}
                       onClick={() => setFilterCategory(cat.value)}
-                      className={`px-5 py-2 rounded-sm text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all border ${filterCategory === cat.value ? 'bg-[#1A73E8] text-white border-[#1A73E8] shadow-[0_0_10px_rgba(26,115,232,0.4)]' : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:border-[#666] hover:text-white'}`}
+                      className={`px-5 py-2 rounded-sm text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all border ${filterCategory === cat.value ? 'bg-[#D61C2B] text-white border-[#D61C2B] shadow-[0_0_10px_rgba(214,28,43,0.4)]' : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:border-[#666] hover:text-white'}`}
                       style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                     >
                       {cat.label}
@@ -493,7 +493,7 @@ export function CommunityPage() {
                           <div className="flex items-center gap-2 text-sm text-[#888]">
                             <span>{post.time}</span>
                             <span className="text-[#444]">|</span>
-                            <span className="px-2 py-0.5 bg-[#1A73E8]/10 text-[#1A73E8] border border-[#1A73E8]/30 rounded-sm text-xs font-bold uppercase tracking-wider">
+                            <span className="px-2 py-0.5 bg-[#D61C2B]/10 text-[#D61C2B] border border-[#D61C2B]/30 rounded-sm text-xs font-bold uppercase tracking-wider">
                               {post.tag}
                             </span>
                           </div>
@@ -533,12 +533,12 @@ export function CommunityPage() {
                         <MessageCircle className={`w-5 h-5 ${expandedComments.has(post.id) ? 'fill-[#D4AF37]/20 text-[#D4AF37]' : 'group-hover:text-[#D4AF37]'}`} />
                         <span className="text-sm font-medium">{post.comments}</span>
                       </button>
-                      <button className="flex items-center gap-2 text-[#888] hover:text-[#00F0FF] transition-colors">
+                      <button className="flex items-center gap-2 text-[#888] hover:text-[#D4AF37] transition-colors">
                         <Share2 className="w-5 h-5" />
                         <span className="text-sm font-medium">{post.shares}</span>
                       </button>
                     </div>
-                    <button className="px-4 py-2 bg-[#1A73E8]/10 text-[#1A73E8] border border-[#1A73E8]/30 rounded-sm text-sm font-bold uppercase tracking-wider hover:bg-[#1A73E8]/20 transition-all flex items-center gap-2">
+                    <button className="px-4 py-2 bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/30 rounded-sm text-sm font-bold uppercase tracking-wider hover:bg-[#D4AF37]/20 transition-all flex items-center gap-2">
                       <Bot className="w-4 h-4" />
                       <span>Hỏi AI</span>
                     </button>
@@ -656,8 +656,8 @@ export function CommunityPage() {
 
               {/* Quick Links */}
               <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] rounded-sm p-1 border border-[#333]" style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)' }}>
-                <div className="bg-[#151515] p-6 text-center border border-[#333] hover:border-[#1A73E8]/50 transition-colors group">
-                  <h3 className="font-bold text-xl mb-3 text-white group-hover:text-[#1A73E8] transition-colors">Tham gia nhóm Facebook</h3>
+                <div className="bg-[#151515] p-6 text-center border border-[#333] hover:border-[#D61C2B]/50 transition-colors group">
+                  <h3 className="font-bold text-xl mb-3 text-white group-hover:text-[#D61C2B] transition-colors">Tham gia nhóm Facebook</h3>
                   <p className="text-[#A3A3A3] text-sm mb-6 leading-relaxed">
                     Kết nối, chia sẻ và học hỏi từ hơn 10,000+ thành viên tích cực khác.
                   </p>
@@ -665,7 +665,7 @@ export function CommunityPage() {
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-3 bg-[#1A73E8] text-white rounded-sm font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(26,115,232,0.4)] hover:bg-[#1557B0] transition-all block"
+                    className="w-full px-4 py-3 bg-[#D61C2B] text-white rounded-sm font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(214,28,43,0.4)] hover:bg-[#B71C1C] transition-all block"
                   >
                     Tham gia ngay
                   </a>
@@ -677,15 +677,15 @@ export function CommunityPage() {
           /* AI Chat Interface */
           <div className="bg-[#151515] rounded-sm shadow-sm border border-[#333] h-[700px] flex flex-col overflow-hidden relative" style={{ clipPath: 'polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px)' }}>
             {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#00F0FF] opacity-5 blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4AF37] opacity-5 blur-[100px] pointer-events-none" />
 
             {/* Chat Header */}
             <div className="p-5 border-b border-[#333] bg-[#1A1A1A] flex items-center gap-4 relative z-10">
-              <div className="w-12 h-12 bg-[#1A1A1A] border border-[#00F0FF]/30 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-                <Bot className="w-6 h-6 text-[#00F0FF]" />
+              <div className="w-12 h-12 bg-[#1A1A1A] border border-[#D4AF37]/30 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                <Bot className="w-6 h-6 text-[#D4AF37]" />
               </div>
               <div>
-                <h3 className="font-bold text-white text-lg uppercase tracking-wider">Trợ lý AI <span className="text-[#00F0FF]">VF7</span></h3>
+                <h3 className="font-bold text-white text-lg uppercase tracking-wider">Trợ lý AI <span className="text-[#D4AF37]">VF7</span></h3>
                 <p className="text-xs text-[#888] flex items-center gap-2 mt-1">
                   <span className="w-2 h-2 bg-[#00C853] rounded-full inline-block animate-pulse shadow-[0_0_8px_rgba(0,200,83,0.8)]" />
                   Sẵn sàng hỗ trợ
@@ -699,7 +699,7 @@ export function CommunityPage() {
                 <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[75%] rounded-sm p-4 border ${msg.role === 'user'
                     ? 'bg-[#1A1A1A] border-[#D4AF37]/50 text-[#E0E0E0] shadow-[0_0_10px_rgba(212,175,55,0.1)]'
-                    : 'bg-[#1A1A1A] border-[#00F0FF]/30 text-[#E0E0E0] shadow-[0_0_10px_rgba(0,240,255,0.1)]'
+                    : 'bg-[#1A1A1A] border-[#D4AF37]/30 text-[#E0E0E0] shadow-[0_0_10px_rgba(212,175,55,0.1)]'
                     }`}
                     style={{
                       clipPath: msg.role === 'user'
@@ -722,11 +722,11 @@ export function CommunityPage() {
                   onChange={(e) => setAiMessage(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleAiSend()}
                   placeholder="Hỏi về lỗi xe, trạm sạc, bảo dưỡng..."
-                  className="flex-1 px-5 py-3.5 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#00F0FF] focus:shadow-[0_0_15px_rgba(0,240,255,0.2)] text-white placeholder-[#555] transition-all"
+                  className="flex-1 px-5 py-3.5 bg-[#0F0F0F] border border-[#333] rounded-sm focus:outline-none focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.2)] text-white placeholder-[#555] transition-all"
                 />
                 <button
                   onClick={handleAiSend}
-                  className="bg-gradient-to-r from-[#00F0FF] to-[#0088CC] text-black px-6 rounded-sm hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:brightness-110 transition-all flex items-center justify-center font-bold"
+                  className="bg-gradient-to-r from-[#D4AF37] to-[#B38728] text-black px-6 rounded-sm hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:brightness-110 transition-all flex items-center justify-center font-bold"
                   style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                 >
                   <Send className="w-5 h-5" />

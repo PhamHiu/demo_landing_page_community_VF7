@@ -203,9 +203,9 @@ export function NewsEventsPage() {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'event':
-        return 'bg-[#1A73E8] text-white shadow-[0_0_10px_rgba(26,115,232,0.4)]';
+        return 'bg-[#D61C2B] text-white shadow-[0_0_10px_rgba(214,28,43,0.4)]';
       case 'news':
-        return 'bg-[#00D2D3] text-black shadow-[0_0_10px_rgba(0,210,211,0.4)]';
+        return 'bg-[#D4AF37] text-black shadow-[0_0_10px_rgba(212,175,55,0.4)]';
       case 'offline':
         return 'bg-[#00C853] text-white shadow-[0_0_10px_rgba(0,200,83,0.4)]';
       default:
@@ -310,7 +310,7 @@ export function NewsEventsPage() {
               </div>
 
               <div
-                className="prose prose-lg max-w-none text-[#CCCCCC] prose-headings:text-white prose-strong:text-[#D4AF37] prose-a:text-[#1A73E8]"
+                className="prose prose-lg max-w-none text-[#CCCCCC] prose-headings:text-white prose-strong:text-[#D4AF37] prose-a:text-[#D61C2B]"
                 dangerouslySetInnerHTML={{ __html: selectedEvent.content || '' }}
               />
 
@@ -504,7 +504,7 @@ export function NewsEventsPage() {
   return (
     <div className="min-h-screen bg-[#0F0F0F] pt-16 text-[#E0E0E0]">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1A73E8] opacity-5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D61C2B] opacity-5 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D61C2B] opacity-5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Featured Banner */}
@@ -586,7 +586,7 @@ export function NewsEventsPage() {
                 <button
                   onClick={() => setSelectedFilter('news')}
                   className={`px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${selectedFilter === 'news'
-                    ? 'bg-[#00D2D3] text-black border-[#00D2D3] shadow-[0_0_10px_rgba(0,210,211,0.4)]'
+                    ? 'bg-[#D4AF37] text-black border-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,0.4)]'
                     : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:text-white hover:border-[#666]'
                     }`}
                   style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
@@ -596,7 +596,7 @@ export function NewsEventsPage() {
                 <button
                   onClick={() => setSelectedFilter('event')}
                   className={`px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${selectedFilter === 'event'
-                    ? 'bg-[#1A73E8] text-white border-[#1A73E8] shadow-[0_0_10px_rgba(26,115,232,0.4)]'
+                    ? 'bg-[#D61C2B] text-white border-[#D61C2B] shadow-[0_0_10px_rgba(214,28,43,0.4)]'
                     : 'bg-[#0F0F0F] text-[#888] border-[#333] hover:text-white hover:border-[#666]'
                     }`}
                   style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
@@ -690,18 +690,18 @@ export function NewsEventsPage() {
                     <p className="text-[#888] mb-4 text-sm line-clamp-2 flex-grow">{event.description}</p>
                     <div className="space-y-2 text-xs text-[#666] border-t border-[#222] pt-4 mt-auto">
                       <div className="flex items-center gap-2">
-                        <CalendarIcon className="w-3.5 h-3.5 text-[#1A73E8]" />
+                        <CalendarIcon className="w-3.5 h-3.5 text-[#D4AF37]" />
                         <span>{event.date}</span>
                       </div>
                       {event.location && (
                         <div className="flex items-center gap-2">
-                          <MapPin className="w-3.5 h-3.5 text-[#1A73E8]" />
+                          <MapPin className="w-3.5 h-3.5 text-[#D4AF37]" />
                           <span>{event.location}</span>
                         </div>
                       )}
                       {event.attendees && (
                         <div className="flex items-center gap-2">
-                          <Users className="w-3.5 h-3.5 text-[#1A73E8]" />
+                          <Users className="w-3.5 h-3.5 text-[#D4AF37]" />
                           <span>{event.attendees} người tham gia</span>
                         </div>
                       )}
@@ -710,7 +710,7 @@ export function NewsEventsPage() {
                       <button
                         className={`w-full mt-5 px-6 py-2.5 rounded-sm font-bold text-sm uppercase tracking-wider transition-all ${event.registered
                           ? 'bg-[#222] text-[#666] border border-[#333]'
-                          : 'bg-transparent border border-[#00D2D3] text-[#00D2D3] hover:bg-[#00D2D3] hover:text-black hover:shadow-[0_0_15px_rgba(0,210,211,0.4)]'
+                          : 'bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]'
                           }`}
                         style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
                       >
@@ -797,7 +797,7 @@ export function NewsEventsPage() {
                         ${selectedDate === day
                           ? 'bg-[#D4AF37] text-black font-bold border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.6)]'
                           : hasEvent
-                            ? 'bg-[#1A73E8] text-white font-bold shadow-[0_0_10px_rgba(26,115,232,0.5)] border-[#1A73E8]'
+                            ? 'bg-[#D61C2B] text-white font-bold shadow-[0_0_10px_rgba(214,28,43,0.5)] border-[#D61C2B]'
                             : 'text-[#666] hover:bg-[#222] hover:text-white border-transparent'
                         }`}
                     >
