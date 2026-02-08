@@ -9,9 +9,14 @@ export function Footer() {
           {/* About */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#D61C2B] to-[#990F1B] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">VF7</span>
-              </div>
+              <Link to="/" className="flex items-center space-x-2">
+                <img
+                  src="/logo-vf7.svg"
+                  alt="VF7 Community Logo"
+                  className="h-10 w-auto"
+                />
+                <span className="font-bold text-xl text-white">VinFast VF7</span>
+              </Link>
             </div>
             <p className="text-[#A3A3A3] text-sm">
               Cộng đồng VinFast VF7 - Kết nối đam mê, chia sẻ hành trình cùng xe điện Việt Nam.
@@ -47,7 +52,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          ty
+
           {/* Social */}
           <div>
             <h3 className="font-semibold mb-4 text-white">Theo dõi chúng tôi</h3>

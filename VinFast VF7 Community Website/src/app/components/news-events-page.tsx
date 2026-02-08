@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Calendar as CalendarIcon, MapPin, Users, Clock, ChevronRight, Search, ArrowLeft, X, CheckCircle } from 'lucide-react';
-import Masonry from 'react-responsive-masonry';
+import { useState, useEffect } from 'react';
+import { Calendar as CalendarIcon, MapPin, Users, ChevronRight, ChevronLeft, Search, ArrowLeft, X, CheckCircle } from 'lucide-react';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 
 interface Event {
@@ -129,6 +128,22 @@ export function NewsEventsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
+  const featuredEvents = mockEvents.slice(0, 3);
+  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+
+  const nextFeatured = () => {
+    setCurrentFeaturedIndex((prev) => (prev + 1) % featuredEvents.length);
+  };
+
+  const prevFeatured = () => {
+    setCurrentFeaturedIndex((prev) => (prev - 1 + featuredEvents.length) % featuredEvents.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextFeatured, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Registration Modal State
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
@@ -153,6 +168,12 @@ export function NewsEventsPage() {
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       return event.title.toLowerCase().includes(query) || event.description.toLowerCase().includes(query);
+    }
+
+    // Filter by Date
+    if (selectedDate) {
+      const eventDay = parseInt(event.date.split('/')[0]);
+      if (eventDay !== selectedDate) return false;
     }
 
     return true;
@@ -474,7 +495,7 @@ export function NewsEventsPage() {
   }
 
   // Calendar dates for current month
-  const currentMonth = new Date(2026, 1); // February 2026
+
   const daysInMonth = new Date(2026, 2, 0).getDate();
   const firstDayOfMonth = new Date(2026, 1, 1).getDay();
 
@@ -487,35 +508,61 @@ export function NewsEventsPage() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D61C2B] opacity-5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Featured Banner */}
-      <div className="relative h-[450px] overflow-hidden">
+      <div className="relative h-[450px] overflow-hidden group">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600"
-          alt="Featured event"
-          className="w-full h-full object-cover"
+          src={featuredEvents[currentFeaturedIndex].image}
+          alt={featuredEvents[currentFeaturedIndex].title}
+          className="w-full h-full object-cover transition-opacity duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-[#0F0F0F]/60 to-transparent flex items-end">
-          <div className="container mx-auto px-4 lg:px-8 pb-16">
-            <div className="animate-in slide-in-from-bottom duration-700 fade-in">
+          <div className="container mx-auto px-4 lg:px-8 pb-16 relative">
+            <div className="animate-in slide-in-from-bottom duration-700 fade-in" key={featuredEvents[currentFeaturedIndex].id}>
               <span className="inline-block px-4 py-1 bg-[#D4AF37] text-black rounded-sm mb-6 text-xs font-bold uppercase tracking-widest">
                 Sự kiện nổi bật
               </span>
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 uppercase tracking-wide drop-shadow-2xl max-w-4xl leading-tight">
-                VinFast VF7 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A73E8] to-[#00F0FF]">Test Drive Tour</span> 2026
+                {featuredEvents[currentFeaturedIndex].title}
               </h1>
-              <p className="text-xl text-[#CCC] mb-8 max-w-2xl font-light">
-                Trải nghiệm lái thử VF7 cùng đội ngũ chuyên gia và nhận nhiều ưu đãi hấp dẫn
+              <p className="text-xl text-[#CCC] mb-8 max-w-2xl font-light line-clamp-2">
+                {featuredEvents[currentFeaturedIndex].description}
               </p>
               <a
                 href="#"
-                onClick={(e) => { e.preventDefault(); handleEventClick(mockEvents[0]); }}
+                onClick={(e) => { e.preventDefault(); handleEventClick(featuredEvents[currentFeaturedIndex]); }}
                 className="px-10 py-4 bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black rounded-sm font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(212,175,55,0.6)] transition-all inline-flex items-center gap-3 group"
                 style={{ clipPath: 'polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px)' }}
               >
-                <span>Đăng ký tham gia</span>
+                <span>Xem chi tiết</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={prevFeatured}
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-[#D4AF37] text-white hover:text-black rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 border border-white/20 hover:border-[#D4AF37]"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={nextFeatured}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-[#D4AF37] text-white hover:text-black rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 border border-white/20 hover:border-[#D4AF37]"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+
+        {/* Indicators */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          {featuredEvents.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentFeaturedIndex(index)}
+              className={`w-12 h-1 rounded-sm transition-all ${index === currentFeaturedIndex ? 'bg-[#D4AF37]' : 'bg-white/30 hover:bg-white/50'
+                }`}
+            />
+          ))}
         </div>
       </div>
 
@@ -609,14 +656,14 @@ export function NewsEventsPage() {
             </div>
 
             {/* Events Grid */}
-            <Masonry columnsCount={2} gutter="24px" className="hidden md:block">
+            <div className="hidden md:grid grid-cols-2 gap-6">
               {filteredEvents.map((event) => (
                 <div
                   key={event.id}
                   onClick={() => handleEventClick(event)}
-                  className="bg-[#151515] rounded-sm shadow-sm overflow-hidden hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all group cursor-pointer border border-[#333] hover:border-[#D4AF37]/50"
+                  className="bg-[#151515] rounded-sm shadow-sm overflow-hidden hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all group cursor-pointer border border-[#333] hover:border-[#D4AF37]/50 flex flex-col h-full"
                 >
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     <ImageWithFallback
                       src={event.image}
                       alt={event.title}
@@ -636,12 +683,12 @@ export function NewsEventsPage() {
                       </div>
                     )}
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors line-clamp-2 uppercase tracking-wide">
                       {event.title}
                     </h3>
-                    <p className="text-[#888] mb-4 text-sm line-clamp-2">{event.description}</p>
-                    <div className="space-y-2 text-xs text-[#666] border-t border-[#222] pt-4">
+                    <p className="text-[#888] mb-4 text-sm line-clamp-2 flex-grow">{event.description}</p>
+                    <div className="space-y-2 text-xs text-[#666] border-t border-[#222] pt-4 mt-auto">
                       <div className="flex items-center gap-2">
                         <CalendarIcon className="w-3.5 h-3.5 text-[#1A73E8]" />
                         <span>{event.date}</span>
@@ -673,7 +720,7 @@ export function NewsEventsPage() {
                   </div>
                 </div>
               ))}
-            </Masonry>
+            </div>
 
             {/* Mobile View */}
             <div className="md:hidden space-y-6">
@@ -745,10 +792,14 @@ export function NewsEventsPage() {
                   return (
                     <div
                       key={day}
-                      className={`aspect-square flex items-center justify-center rounded-sm text-sm ${hasEvent
-                        ? 'bg-[#1A73E8] text-white font-bold shadow-[0_0_10px_rgba(26,115,232,0.5)]'
-                        : 'text-[#666] hover:bg-[#222] hover:text-white'
-                        } cursor-pointer transition-colors border ${hasEvent ? 'border-[#1A73E8]' : 'border-transparent'}`}
+                      onClick={() => setSelectedDate(selectedDate === day ? null : day)}
+                      className={`aspect-square flex items-center justify-center rounded-sm text-sm cursor-pointer transition-colors border
+                        ${selectedDate === day
+                          ? 'bg-[#D4AF37] text-black font-bold border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.6)]'
+                          : hasEvent
+                            ? 'bg-[#1A73E8] text-white font-bold shadow-[0_0_10px_rgba(26,115,232,0.5)] border-[#1A73E8]'
+                            : 'text-[#666] hover:bg-[#222] hover:text-white border-transparent'
+                        }`}
                     >
                       {day}
                     </div>
